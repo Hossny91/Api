@@ -12,7 +12,7 @@ class CategoriaProductoController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**

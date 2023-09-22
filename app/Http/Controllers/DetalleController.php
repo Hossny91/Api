@@ -12,7 +12,8 @@ class DetalleController extends Controller
      */
     public function index()
     {
-        //
+        $detalle = Detalle::all();
+        return response()->json($detalle);
     }
 
     /**
@@ -28,7 +29,15 @@ class DetalleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $detalle = new Detalle;
+        $detalle = $request->Cantidad;
+        $detalle = $request->subtotal;
+        $detalle = $request->descuento;
+        $data =[
+            "mensaje" => "detalle creado",
+            "detalle" => $detalle   
+        ];
+        return response->json($data);
     }
 
     /**
@@ -36,7 +45,7 @@ class DetalleController extends Controller
      */
     public function show(Detalle $detalle)
     {
-        //
+        return response->json($detalle);
     }
 
     /**
@@ -52,7 +61,15 @@ class DetalleController extends Controller
      */
     public function update(Request $request, Detalle $detalle)
     {
-        //
+        $detalle->Cantidad = $request->Cantidad;
+        $detalle->subtotal = $request->subtotal;
+        $detalle->descuento = $request->descuento;
+        $detalle->save();
+        $data =[
+            "mesaje" => "update creado",
+            "detalle" => $detalle
+        ];
+        return response->json($data);
     }
 
     /**
@@ -60,6 +77,11 @@ class DetalleController extends Controller
      */
     public function destroy(Detalle $detalle)
     {
-        //
+        $detalle->delete();
+        $data =[
+            "mesaje" => "detalle eliminada",
+            "detalle" => $detalle
+        ];
+        return response()->json($data);
     }
 }

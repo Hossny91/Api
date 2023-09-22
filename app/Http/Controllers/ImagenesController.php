@@ -12,7 +12,8 @@ class ImagenesController extends Controller
      */
     public function index()
     {
-        //
+        $imagen = Imagenes::all();
+        return response()->json($imagen);
     }
 
     /**
@@ -28,7 +29,14 @@ class ImagenesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $imagen = new Imagen;
+        $imagen = $request->imagen;
+        $imagen = save();
+        $data =[
+            "mesaje" => "imagen creada",
+            "Imagen" => $imagen
+        ];
+        return response->json($data);
     }
 
     /**
@@ -36,7 +44,8 @@ class ImagenesController extends Controller
      */
     public function show(Imagenes $imagenes)
     {
-        //
+       return response->json($imagen);
+
     }
 
     /**
@@ -44,7 +53,7 @@ class ImagenesController extends Controller
      */
     public function edit(Imagenes $imagenes)
     {
-        //
+
     }
 
     /**
@@ -52,7 +61,13 @@ class ImagenesController extends Controller
      */
     public function update(Request $request, Imagenes $imagenes)
     {
-        //
+        $imagenes->imagen = $request->imagen;
+        $imagenes->save();
+        $data =[
+            "mesaje" => "update creada",
+            "imagen" => $imagenes
+        ];
+        return response->json($data);
     }
 
     /**
@@ -60,6 +75,11 @@ class ImagenesController extends Controller
      */
     public function destroy(Imagenes $imagenes)
     {
-        //
+        $imagenes->delete();
+        $data =[
+            "mesaje" => "imagen eliminada",
+            "image" => $imagenes
+        ];
+        return response()->json($data);
     }
 }

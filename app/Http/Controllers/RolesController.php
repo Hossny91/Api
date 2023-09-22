@@ -12,7 +12,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        //
+           $roles = Roles::all();
+        return response()->json($roles);
     }
 
     /**
@@ -20,7 +21,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+    
     }
 
     /**
@@ -28,7 +29,15 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $roles = new Roles;
+        $roles = $request->nombre_rol;
+        $roles = $request->enable;
+        $roles->save();
+        $data =[
+            "mesaje" => "roles creada",
+            "roles" => $roles
+        ];
+        return response->json($data);
     }
 
     /**
@@ -36,7 +45,7 @@ class RolesController extends Controller
      */
     public function show(Roles $roles)
     {
-        //
+        return response->json($roles);
     }
 
     /**
@@ -52,7 +61,14 @@ class RolesController extends Controller
      */
     public function update(Request $request, Roles $roles)
     {
-        //
+        $roles->nombre_rol = $request->nombre_rol;
+        $roles->enable = $request->enable;
+        $roles->save();
+        $data =[
+            "mesaje" => "update creada",
+            "categoria" => $roles
+        ];
+        return response->json($data);
     }
 
     /**
@@ -60,6 +76,11 @@ class RolesController extends Controller
      */
     public function destroy(Roles $roles)
     {
-        //
+        $roles->delete();
+        $data =[
+            "mesaje" => "roles eliminada",
+            "roles" => $roles
+        ];
+        return response()->json($data);
     }
 }

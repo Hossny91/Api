@@ -12,7 +12,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuario = Usuario::all();
+        return response()->json($usuario);
     }
 
     /**
@@ -28,15 +29,25 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $usuario = new Usuario;
+        $usuario = $request->user;
+        $usuario = $request->Email;
+        $usuario = $request->password;
+        $usuario = $request->image;
+        $usuario->save();
+        $data =[
+            "mesaje" => "usuario creada",
+            "usuario" => $usuario
+        ];
+        return response->json($data);    }
 
     /**
      * Display the specified resource.
      */
     public function show(Usuario $usuario)
     {
-        //
+     return response->json($usuario);
+
     }
 
     /**
@@ -52,7 +63,16 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, Usuario $usuario)
     {
-        //
+        $usuario->user = $request->user;
+        $usuario->Email = $request->Email;
+        $usuario->password = $request->password;
+        $usuario->image = $request->image;
+        $usuario->save();
+        $data =[
+            "mesaje" => "update creada",
+            "usuario" => $usuario
+        ];
+        return response->json($data);
     }
 
     /**
@@ -60,6 +80,11 @@ class UsuarioController extends Controller
      */
     public function destroy(Usuario $usuario)
     {
-        //
+        $usuario->delete();
+        $data =[
+            "mesaje" => "usuario eliminada",
+            "usuario" => $usuario
+        ];
+        return response()->json($data);
     }
 }

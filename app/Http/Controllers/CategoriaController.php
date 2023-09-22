@@ -29,7 +29,15 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $categoria = new Categoria;
+        $categoria = $request->NombreCategoria;
+        $categoria = $request->enable;
+        $categoria->save();
+        $data =[
+            "mesaje" => "categoria creada",
+            "categoria" => $categoria
+        ];
+        return response->json($data);
     }
 
     /**
@@ -37,7 +45,7 @@ class CategoriaController extends Controller
      */
     public function show(categoria $categoria)
     {
-        //
+        return response->json($categoria);
     }
 
     /**
@@ -53,7 +61,15 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, categoria $categoria)
     {
-        //
+        
+        $categoria->NombreCategoria = $request->NombreCategoria;
+        $categoria->enable = $request->enable;
+        $categoria->save();
+        $data =[
+            "mesaje" => "update creada",
+            "categoria" => $categoria
+        ];
+        return response->json($data);
     }
 
     /**
@@ -61,6 +77,11 @@ class CategoriaController extends Controller
      */
     public function destroy(categoria $categoria)
     {
-        //
+        $categoria->delete();
+        $data =[
+            "mesaje" => "categoria eliminada",
+            "categoria" => $categoria
+        ];
+        return response()->json($data);
     }
 }
