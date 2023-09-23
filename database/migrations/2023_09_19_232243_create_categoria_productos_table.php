@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('cat_id');
             $table->foreign('cat_id')->references('id')->on('categorias');
             $table->unsignedBigInteger('Product_id');
-            $table->foreign('Product_id')->references('id')->on('produtos');
+            $table->foreign('Product_id')->references('id')->on('productos');
             $table->timestamps();
         });
     }
